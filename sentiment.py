@@ -4,12 +4,12 @@ import streamlit as st
 def main():
     txt = st.text_area(label='Put your review here')
 
+    model_name = "aychang/roberta-base-imdb"
+
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-    model_name = "aychang/roberta-base-imdb"
-
-    nlp = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
+    nlp = pipeline(model=model, tokenizer=tokenizer)
 
     results = nlp(txt)
 
