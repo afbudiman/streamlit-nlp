@@ -7,6 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
 
+nltk.download('omw-1.4')
+nltk.download('wordnet')
 
 df = pd.read_csv('movie_data.csv', encoding='utf-8')
 df = df.rename(columns={"0": "review", "1": "sentiment"})
@@ -17,7 +19,6 @@ def text_cleaning(text, lemmatize_words=True):
     text = (re.sub('[\W]+', ' ', text.lower()) + ' '.join(emoticons).replace('-', ''))
     
     if lemmatize_words:
-        nltk.download('wordnet')
         text = text.split()
         lemmatizer = WordNetLemmatizer() 
         lemmatized_words = [lemmatizer.lemmatize(word) for word in text]
