@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import nltk
 from nltk.stem import WordNetLemmatizer 
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
@@ -16,6 +17,7 @@ def text_cleaning(text, lemmatize_words=True):
     text = (re.sub('[\W]+', ' ', text.lower()) + ' '.join(emoticons).replace('-', ''))
     
     if lemmatize_words:
+        nltk.download('wordnet')
         text = text.split()
         lemmatizer = WordNetLemmatizer() 
         lemmatized_words = [lemmatizer.lemmatize(word) for word in text]
